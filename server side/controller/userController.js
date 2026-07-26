@@ -50,10 +50,10 @@ const handleUserLogin = async (req, res) => {
             return res.status(401).json({ message: "Field cannot be empty", success: false });
         }
 
-        console.log("login email", email)
+        // console.log("login email", email)
         const isUser = await USER.findOne({ email });
 
-        console.log("isUser Login : ", isUser)
+        // console.log("isUser Login : ", isUser)
         if (!isUser) {
             return res.status(404).json({ message: "User does not exists", success: false });
         }

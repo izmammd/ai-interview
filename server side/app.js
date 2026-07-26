@@ -5,14 +5,19 @@ const { configDotenv } = require("dotenv");
 const userRouter = require("./router/userRouter");
 const cookieParser = require("cookie-parser");
 
+const sessionRouter = require("./router/sessionRouter.js")
 
-const app = express();
 // dotenv.config();
 configDotenv();
+
+const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({extended : true}))
 
 app.use("/api/user",userRouter);
+
+app.use("/api/session",sessionRouter)
 
 const port = process.env.PORT || 5000;
 
