@@ -1,12 +1,22 @@
 const express = require("express");
+// const dotenv = require("dotenv");
+const connectDB = require("./config/Db");
+const { configDotenv } = require("dotenv");
+const userRouter = require("./router/userRouter");
+const cookieParser = require("cookie-parser");
 
 
 const app = express();
+// dotenv.config();
+configDotenv();
+app.use(express.json());
+app.use(cookieParser());
 
-app.get("/",(req,res)=>{
-    console.log("work");
-})
+app.use("/api/user",userRouter);
 
-app.listen(3000,"localhost",()=>{
-    console.log("http://localhost:3000")
+const port = process.env.PORT || 5000;
+
+app.listen(port,"localhost",()=>{
+    connectDB();
+    console.log(`http://localhost:${port}`)
 })
