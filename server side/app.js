@@ -6,6 +6,7 @@ const userRouter = require("./router/userRouter");
 const cookieParser = require("cookie-parser");
 
 const sessionRouter = require("./router/sessionRouter.js")
+const questionRouter = require("./router/questionRouter.js")
 
 // dotenv.config();
 configDotenv();
@@ -15,9 +16,19 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended : true}))
 
+// app.use((req, res, next) => {
+//     console.log("Method:", req.method);
+//     console.log("URL:", req.url);
+//     console.log("Content-Type:", req.headers["content-type"]);
+//     console.log("Body:", req.body);
+//     next();
+// });
+
 app.use("/api/user",userRouter);
 
 app.use("/api/session",sessionRouter)
+
+app.use("/api/question",questionRouter)
 
 const port = process.env.PORT || 5000;
 
