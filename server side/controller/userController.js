@@ -78,6 +78,25 @@ const handleUserLogin = async (req, res) => {
     }
 }
 
+const handleGetUser = async (req, res) => {
+
+    try {
+
+        const id = req.payload;
+
+        const isUser = await USER.findById(id);
+        if (!isUser) {
+            return res.status(404).json({ message: "User does not exists", success: false });
+        }
+        return res.json({ isUser })
+
+    }
+    catch (err) {
+        console.log("Error comes from User Get User...", err.message)
+        return res.status(500).json({ message: "Error comes from Get User..", success: false })
+    }
+}
+
 const handleUserDetail = async (req, res) => {
 
     try {
@@ -108,7 +127,6 @@ const handleUserLogOut = async (req, res) => {
 
     try {
 
-        console.log("LOGOUT CONTROLLER RUNNING");
         if (req.payload == undefined) {
             return res.status(400).json({ message: "token expired or user is no longer", success: false });
         }
@@ -215,13 +233,13 @@ const handleUserDeleteByPassword = async (req, res) => {
 const handleUserUpdate = async (req, res) => {
 
     try {
-        if (req.body == undefined) {
-            return res.status(400).json({ message: "please pass the data", success: false });
-        }
-
-        const { fullName, password, newPassword } = req.body;
+        const { fullName, password, newPassword } = req.body || {};
 
         const profilePhoto = req.file;
+
+        if (!fullName && !password && !newPassword && !profilePhoto) {
+            return res.status(400).json({ message: "No update data provided", success: false });
+        }
 
         const id = req.payload;
 
@@ -243,8 +261,8 @@ const handleUserUpdate = async (req, res) => {
 
         // Update name if provided
         if (fullName) {
-            if(fullName == isUser.fullName){
-                return res.status(401).json({message : "User not cannot be same"})
+            if (fullName == isUser.fullName) {
+                return res.status(401).json({ message: "User not cannot be same" })
             }
             isUser.fullName = fullName;
         }
@@ -258,13 +276,14 @@ const handleUserUpdate = async (req, res) => {
                 return res.status(400).json({ message: "Password is Invalid", success: false })
             }
 
-            const isSamePassword = await bcrypt.compare(newPassword,isUser.password)
+            const isSamePassword = await bcrypt.compare(newPassword, isUser.password)
 
             if (isSamePassword) {
                 return res.status(400).json({ message: "User password cannot be same as old password", success: false })
             }
 
             const updatePassword = await bcrypt.hash(newPassword, 10);
+            isUser.password = updatePassword;
         }
 
         await isUser.save();
@@ -274,9 +293,9 @@ const handleUserUpdate = async (req, res) => {
     }
     catch (err) {
         console.log("Error comes from User Update..", err.message)
-        return res.status(500).json({ message: "Error comes from User Upadate..",success:false })
+        return res.status(500).json({ message: "Error comes from User Upadate..", success: false })
     }
 
 }
 
-module.exports = { handleUserRegister, handleUserLogin, handleUserDetail, handleUserLogOut, handleUserDelete, handleUserDeleteByPassword, handleUserUpdate }
+module.exports = { handleUserRegister, handleUserLogin, handleGetUser, handleUserDetail, handleUserLogOut, handleUserDelete, handleUserDeleteByPassword, handleUserUpdate }

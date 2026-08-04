@@ -24,7 +24,7 @@ const handleGenerateInterviewQuestion = async (req, res) => {
                             "answer":"detailed answer"
                             }
                             ]
-                            Generate 5 questions for a ${role}
+                            Generate 10 questions for a ${role}
                             with ${experience} years experience.
 
                             Focus on topics:
