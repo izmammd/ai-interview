@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import api from "../../api";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ export default function Profile() {
 
     const getProfile = async () => {
         try {
-            const res = await api.get("/api/user/getuser", {
+            const res = await axios.get("https://ai-interview-rbit.onrender.com/api/user/getuser", {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -38,7 +38,7 @@ export default function Profile() {
     // console.log("get Profile : ", data);
 
     const handleLogOut = async () => {
-        const res = await api.get("/api/user/logout",
+        const res = await axios.get("https://ai-interview-rbit.onrender.com/api/user/logout",
             { withCredentials: true });
         console.log(res.data);
         toast.success(res.data.message);

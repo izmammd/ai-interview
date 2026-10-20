@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import api from "../../api";
+import axios from "axios"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -12,7 +12,7 @@ export default function CreateSession() {
     const { register, handleSubmit } = useForm()
 
     const handleSession = async (data) => {
-        const res = await api.post("/api/session/createSession", data,
+        const res = await axios.post("https://ai-interview-rbit.onrender.com/api/session/createSession", data,
             { withCredentials: true }
         )
 

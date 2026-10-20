@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import api from "../../api";
+import axios from "axios";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
@@ -13,7 +13,7 @@ export default function Register() {
     const { register, handleSubmit } = useForm();
 
     const handleRegisterUser = async (FormData) => {
-        let res = await api.post("/api/user/signup",
+        let res = await axios.post("https://ai-interview-rbit.onrender.com/api/user/signup",
             FormData,
             { withCredentials: true }
         )

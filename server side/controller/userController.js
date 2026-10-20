@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const getImagekit = require("../config/imagekit.js")
 
 const getAuthCookieOptions = () => {
-    const secure = (process.env.CLIENT_URL || "https://ai-interviews-rall.onrender.com").startsWith("https://");
+    const secure = (process.env.CLIENT_URL || "https://ai-interview-1-l14e.onrender.com").startsWith("https://");
 
     return {
         httpOnly: true,

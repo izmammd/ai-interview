@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import api from "../../api";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -28,7 +28,7 @@ export default function Login() {
     }
 
     const loginUser = async (userDetails) => {
-        let res = await api.post("/api/user/login",
+        let res = await axios.post("https://ai-interview-rbit.onrender.com/api/user/login",
             userDetails,
             {
                 withCredentials : true
@@ -45,7 +45,7 @@ export default function Login() {
             
             // Fetch user data from server after successful login
             try {
-                const userRes = await api.get('/api/user/getUser', {
+                const userRes = await axios.get('https://ai-interview-rbit.onrender.com/api/user/getUser', {
                     headers: {
                         "Content-Type": "application/json"
                     },

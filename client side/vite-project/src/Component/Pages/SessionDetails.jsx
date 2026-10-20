@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import AiQuestion from "../AiQuestion";
-import api from "../../api";
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 
@@ -14,7 +14,7 @@ export default function SessionDetails() {
     const handleGetSessionDetails = async () => {
 
         try {
-            const res = await api.get(`/api/session/getSessionById/${param.id}`, {
+            const res = await axios.get(`https://ai-interview-rbit.onrender.com/api/session/getSessionById/${param.id}`, {
                 headers: {
                     "Content-Type": "application/json"
                 },

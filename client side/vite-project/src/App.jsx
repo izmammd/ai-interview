@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { setUserFromServer } from './Redux Store/Slice';
-import api from './api';
+import axios from 'axios';
 
 //BOOTSTRAP
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await api.get('/api/user/getUser', {
+        const res = await axios.get('https://ai-interview-rbit.onrender.com/api/user/getUser', {
           headers: {
             "Content-Type": "application/json"
           },
@@ -85,4 +85,3 @@ function App() {
 }
 
 export default App
-

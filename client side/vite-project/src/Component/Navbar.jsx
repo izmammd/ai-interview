@@ -2,7 +2,7 @@ import { useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { removeUser } from "../Redux Store/Slice.jsx"
-import api from "../api";
+import axios from "axios"
 import { toast } from "react-toastify"
 import Profile from "./Pages/Profile.jsx"
 
@@ -18,7 +18,7 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         try {
-            let res = await api.get("/api/user/logout",
+            let res = await axios.get("https://ai-interview-rbit.onrender.com/api/user/logout",
                 {
                     withCredentials: true
                 }

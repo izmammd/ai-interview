@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import api from "../../api";
+import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
@@ -9,7 +9,7 @@ export default function Session() {
     const navigate = useNavigate()
 
     const getSession = async () => {
-        const res = await api.get("/api/session/getSession", {
+        const res = await axios.get("https://ai-interview-rbit.onrender.com/api/session/getSession", {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -33,7 +33,7 @@ export default function Session() {
 
     const handleRemove = async (id) => {
         try {
-            const res = await api.delete(`/api/session/deleteSession/${id}`, {
+            const res = await axios.delete(`https://ai-interview-rbit.onrender.com/api/session/deleteSession/${id}`, {
                 headers: {
                     "Content-Type": "application/json"
                 },

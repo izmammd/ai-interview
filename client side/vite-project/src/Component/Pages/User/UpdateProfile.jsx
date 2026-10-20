@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import api from "../../../api";
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ export default function UpdateProfile() {
 
     const updateProfileApi = async (formData) => {
 
-        const res = await api.post("/api/user/update",
+        const res = await axios.post("https://ai-interview-rbit.onrender.com/api/user/update",
             formData,
             { withCredentials: true }
         )
