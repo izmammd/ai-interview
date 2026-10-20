@@ -13,7 +13,7 @@ const questionRouter = require("./router/questionRouter.js")
 configDotenv();
 const app = express();
 
-const frontendOrigin = process.env.CLIENT_URL || "https://ai-interviews-rall.onrender.com";
+const frontendOrigin = process.env.CLIENT_URL || "https://ai-interview-1-l14e.onrender.com";
 const allowedOrigins = new Set([frontendOrigin, "http://localhost:5173"]);
 
 app.use(cors({
