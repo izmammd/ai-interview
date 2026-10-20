@@ -4,6 +4,24 @@ const QUESTION = require("../models/question.Models.js");
 
 
 const ai = new GoogleGenerativeAI(process.env.GEN_AI)
+const generateContentWithRetry = async (model, prompt) => {
+    const retryableStatuses = [429, 500, 502, 503, 504];
+    const maxAttempts = 3;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        try {
+            return await model.generateContent(prompt);
+        }
+        catch (err) {
+            if (!retryableStatuses.includes(err.status) || attempt === maxAttempts) {
+                throw err;
+            }
+
+            await new Promise((resolve) => setTimeout(resolve, 1000 * (2 ** (attempt - 1))));
+        }
+    }
+};
+
 
 const handleGenerateInterviewQuestion = async (req, res) => {
 
@@ -46,7 +64,7 @@ const handleGenerateInterviewQuestion = async (req, res) => {
         // const model = ai.getGenerativeModel({
         //     model: "gemini-2.5-flash"
         // });
-        const result = await model.generateContent(prompt);
+        const result = await generateContentWithRetry(model, prompt);
 
         // rawText helps to remove unnecessary formatting from Gemini output
         let rawText = result.response.text();
@@ -86,7 +104,14 @@ const handleGenerateInterviewQuestion = async (req, res) => {
     }
     catch (err) {
         console.log("Error coming from question generate..", err.message);
-        return res.status(500).json({ message: "Error coming from question generate..", success: false })
+        const isProviderUnavailable = [429, 500, 502, 503, 504].includes(err.status);
+
+        return res.status(isProviderUnavailable ? (err.status === 429 ? 429 : 503) : 500).json({
+            message: isProviderUnavailable
+                ? "The AI service is temporarily busy. Please try again shortly."
+                : err.message || "Error coming from question generate..",
+            success: false
+        })
     }
 }
 
