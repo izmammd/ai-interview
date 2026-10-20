@@ -1,6 +1,56 @@
+import { useQuery, useQueryClient } from "@tanstack/react-query"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 
 export default function Session() {
+
+    const navigate = useNavigate()
+
+    const getSession = async () => {
+        const res = await axios.get("http://localhost:3000/api/session/getSession", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
+        })
+        return res.data
+    }
+
+    const { data, isLoading, refetch } = useQuery({
+        queryKey: ["session"],
+        queryFn: getSession
+    })
+
+    // console.log("Session : ", data?.sessions);
+    const sessions = data?.sessions || [];
+
+    const navigateSession = (id) => {
+        // console.log(id)
+        navigate(`/session/${id}`)
+    }
+
+    const handleRemove = async (id) => {
+        try {
+            const res = await axios.delete(`http://localhost:3000/api/session/deleteSession/${id}`, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true
+            })
+
+            if (res.data.success) {
+                // Refresh the session list after successful deletion
+                refetch();
+                toast.success(res.data.message);
+
+            }
+        } catch (error) {
+            console.error("Error deleting session:", error)
+            toast.error(err.response?.data?.message || "Something is wrong")
+        }
+    }
 
     return (<>
 
@@ -10,226 +60,28 @@ export default function Session() {
                 background: "#ffffff"
             }}>
 
-            <div className="text-center text-white p-5 shadow-lg mt-4"
-                style={{
-                    width: "500px",
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "#ffffff"
-                }}
-            >
+            {sessions.length ? (
+                sessions.map((item, i) => {
+                    return (
+                        <div key={i} className="card shadow-lg text-center p-5 mt-4">
 
-                <div className="mb-4">
-                    {/* <label className="form-label">role</label> */}
-                    <input type="text" className="form-control" placeholder="Enter Your role..." />
-                </div>
+                            <div className="d-flex justify-content-end align-items-center">
+                                <button className="btn btn-danger d-flex me-1" onClick={() => handleRemove(item._id)}><i class="bi bi-trash3"></i></button>
+                            </div>
 
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Experience.." />
-                </div>
+                            <div onClick={() => navigateSession(item._id)}>
+                                <h1>{item.role}</h1>
+                                <h3>{item.experience}</h3>
+                                <h4>{item.topicsToFocus}</h4>
+                            </div>
 
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Topics" />
-                </div>
-
-                <div className="mb-4">
-                    <button className="btn btn-primary btn-lg px-5">Generate Question</button>
-                </div>
-
-
-
-            </div>
-
-            <div className="text-center text-white p-5 shadow-lg mt-4"
-                style={{
-                    width: "500px",
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "#ffffff"
-                }}
-            >
-
-                <div className="mb-4">
-                    {/* <label className="form-label">role</label> */}
-                    <input type="text" className="form-control" placeholder="Enter Your role..." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Experience.." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Topics" />
-                </div>
-
-                <div className="mb-4">
-                    <button className="btn btn-primary btn-lg px-5">Generate Question</button>
-                </div>
-            </div>
-
-            <div className="text-center text-white p-5 shadow-lg mt-4"
-                style={{
-                    width: "500px",
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "#ffffff"
-                }}
-            >
-
-                <div className="mb-4">
-                    {/* <label className="form-label">role</label> */}
-                    <input type="text" className="form-control" placeholder="Enter Your role..." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Experience.." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Topics" />
-                </div>
-
-                <div className="mb-4">
-                    <button className="btn btn-primary btn-lg px-5">Generate Question</button>
-                </div>
-            </div>
-
-            <div className="text-center text-white p-5 shadow-lg mt-4"
-                style={{
-                    width: "500px",
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "#ffffff"
-                }}
-            >
-
-                <div className="mb-4">
-                    {/* <label className="form-label">role</label> */}
-                    <input type="text" className="form-control" placeholder="Enter Your role..." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Experience.." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Topics" />
-                </div>
-
-                <div className="mb-4">
-                    <button className="btn btn-primary btn-lg px-5">Generate Question</button>
-                </div>
-            </div>
-
-            <div className="text-center text-white p-5 shadow-lg mt-4"
-                style={{
-                    width: "500px",
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "#ffffff"
-                }}
-            >
-
-                <div className="mb-4">
-                    {/* <label className="form-label">role</label> */}
-                    <input type="text" className="form-control" placeholder="Enter Your role..." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Experience.." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Topics" />
-                </div>
-
-                <div className="mb-4">
-                    <button className="btn btn-primary btn-lg px-5">Generate Question</button>
-                </div>
-            </div>
-
-            <div className="text-center text-white p-5 shadow-lg mt-4"
-                style={{
-                    width: "500px",
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "#ffffff"
-                }}
-            >
-
-                <div className="mb-4">
-                    {/* <label className="form-label">role</label> */}
-                    <input type="text" className="form-control" placeholder="Enter Your role..." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Experience.." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Topics" />
-                </div>
-
-                <div className="mb-4">
-                    <button className="btn btn-primary btn-lg px-5">Generate Question</button>
-                </div>
-            </div>
-
-            <div className="text-center text-white p-5 shadow-lg"
-                style={{
-                    width: "500px",
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "#ffffff"
-                }}
-            >
-
-                <div className="mb-4">
-                    {/* <label className="form-label">role</label> */}
-                    <input type="text" className="form-control" placeholder="Enter Your role..." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Experience.." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Topics" />
-                </div>
-
-                <div className="mb-4">
-                    <button className="btn btn-primary btn-lg px-5">Generate Question</button>
-                </div>
-            </div>
-
-            <div className="text-center text-white p-5 shadow-lg mt-4"
-                style={{
-                    width: "500px",
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "#ffffff"
-                }}
-            >
-
-                <div className="mb-4">
-                    {/* <label className="form-label">role</label> */}
-                    <input type="text" className="form-control" placeholder="Enter Your role..." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Experience.." />
-                </div>
-
-                <div className="mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Topics" />
-                </div>
-
-                <div className="mb-4">
-                    <button className="btn btn-primary btn-lg px-5">Generate Question</button>
-                </div>
-            </div>
+                        </div>
+                    )
+                })
+            ) : (<h1>No Data</h1>)}
 
         </div>
 
     </>)
 }
+

@@ -13,11 +13,11 @@ const handleSessionCreate = async (req, res) => {
 
         const { role, experience, topicsToFocus } = req.body;
 
-        console.log("1", req.body)
+        
         if (!role || !experience || !topicsToFocus) {
             return res.status(401).json({ message: "Please fill all the fiels..", success: false });
         }
-        console.log("2")
+
         if (req.payload == undefined) {
             return res.status(401).json({ message: "token is expired or user doenot exists", success: false });
         }
@@ -48,10 +48,10 @@ const handleGetSession = async (req, res) => {
 
         const id = req.payload;
         console.log("ID : ", id)
-        const isSession = await SESSION.findOne({ user: id }).sort({ createdAt: -1 }).populate("questions");
+        const sessions = await SESSION.find({ user: id }).sort({ createdAt: -1 }).populate("questions");
 
-        console.log("get session : ", isSession)
-        return res.status(200).json({ isSession, success: true });
+        // console.log("get sessions : ", sessions)
+        return res.status(200).json({ sessions, success: true });
     }
     catch (err) {
         console.log("Error coming from Get Session...", err.message);

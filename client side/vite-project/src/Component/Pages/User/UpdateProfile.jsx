@@ -44,7 +44,7 @@ export default function UpdateProfile() {
     })
 
     const handleUpdateProfile = (data) => {
-        console.log(data)
+        // console.log(data)
 
         const formData = new FormData();
 
@@ -101,3 +101,4 @@ export default function UpdateProfile() {
 
     </>)
 }
+

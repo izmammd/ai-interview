@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../Redux Store/Slice";
+import { setUserFromServer } from "../../Redux Store/Slice";
 import {useMutation} from "@tanstack/react-query"
 
 
@@ -59,14 +59,29 @@ export default function Login() {
 
     const mutation = useMutation({
         mutationFn : loginUser,
-        onSuccess : (data) => {
+        onSuccess : async (data) => {
             toast.success(data.message);
-            dispatch(addUser());
-            navigate("/session")
+            
+            // Fetch user data from server after successful login
+            try {
+                const userRes = await axios.get('http://localhost:3000/api/user/getUser', {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    withCredentials: true
+                });
+                
+                if (userRes.data.isUser) {
+                    dispatch(setUserFromServer(userRes.data.isUser));
+                }
+            } catch (error) {
+                console.log("Error fetching user data:", error);
+            }
+            
+            navigate("/createsession")
             console.log(data);
         },
         onError : (err)=>{
-            // toast.error(err.response.data.message);
             toast.error(
                 err.response?.data?.message || "Something is wrong"
             )
@@ -129,3 +144,4 @@ export default function Login() {
 
     </>)
 }
+

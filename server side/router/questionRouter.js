@@ -14,4 +14,4 @@ const questionRouter = express.Router();
 questionRouter.post("/generateQuestion",handleAuthMiddleware,handleGenerateInterviewQuestion);
 questionRouter.post("/toggleQuestion/:id",handleAuthMiddleware,handleTogglePinnedQuestion);
 
-module.exports = questionRouter;
+module.exports = questionRouter; 

@@ -43,22 +43,25 @@ export default function Navbar() {
 
     return (<>
         <nav className="nav navbar shadow-sm p-4 sticky-top">
-            <div className="navbar-brand">
-                Question Generaator
+            <div className="navbar-brand fw-bold text-warning">
+                SkillUp AI
             </div>
 
-            <div className="d-flex gap-3">
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/session">Session</NavLink>
-                <NavLink to="/question">Question</NavLink>
-                <NavLink to="session/:id">Session By ID</NavLink>
-            </div>
+            {
+                isAuthenticate ?
+                    <div className="d-flex gap-3">
+                        <NavLink to="/createsession" className="btn btn-primary"></NavLink>
+                        <NavLink to="/session" className="btn btn-info"></NavLink>
+                        
+                    </div> :
+                    ""
+            }
 
             <div>
 
                 {
                     isAuthenticate ?
-                        <Profile />:
+                        <Profile /> :
                         (<>
                             <button className="btn btn-primary me-3" onClick={handleLogin}>Login</button>
                             <button className="btn btn-warning" onClick={handleRegister}>Register</button>
@@ -80,6 +83,7 @@ export default function Navbar() {
         </nav>
 
 
-        
+
     </>)
 }
+

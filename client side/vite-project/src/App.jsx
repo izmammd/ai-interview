@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { setUserFromServer } from './Redux Store/Slice';
+import axios from 'axios';
 
 //BOOTSTRAP
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,9 +23,40 @@ import ForgotPass from './Component/Pages/User/ForgotPass';
 import UpdatePass from './Component/Pages/User/UpdatePass';
 import Myprofile from './Component/Pages/User/Myprofile';
 import UpdateProfile from './Component/Pages/User/UpdateProfile';
+import CreateSession from './Component/Pages/CreateSession';
 
 
 function App() {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Check authentication status from server on app mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await axios.get('http://localhost:3000/api/user/getUser', {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          withCredentials: true
+        });
+        
+        if (res.data.isUser) {
+          dispatch(setUserFromServer(res.data.isUser));
+        }
+      } catch (error) {
+        console.log("User not authenticated");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [dispatch])
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <>
@@ -34,11 +68,12 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/session' element={<Session />} />
           <Route path='/question' element={<Question />} />
-          <Route path='/session/:id' element={<SessionDetails />}>Session By Id</Route>
+          <Route path='/session/:id' element={<SessionDetails />}></Route>
           <Route path='/forgotpass' element={<ForgotPass />}></Route>
           <Route path='/updatepass' element={<UpdatePass />}></Route>
           <Route path='/myprofile' element={<Myprofile />}></Route>
           <Route path='/updateprofile' element={<UpdateProfile />}></Route>
+          <Route path='/createsession' element={<CreateSession />}></Route>
         </Routes>
 
       </BrowserRouter>
@@ -50,3 +85,5 @@ function App() {
 }
 
 export default App
+
+

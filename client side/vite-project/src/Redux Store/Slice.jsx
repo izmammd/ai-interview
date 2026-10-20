@@ -5,19 +5,28 @@ const userSlice = createSlice({
     
     initialState: {
         isAuthenticate: false,
+        user: null
     },
 
     reducers: {
         addUser: (state, actions) => {
-            state.isAuthenticate = true
+            state.isAuthenticate = true;
+            state.user = actions.payload;
         },
 
         removeUser: (state, actions) => {
-            state.isAuthenticate = false
+            state.isAuthenticate = false;
+            state.user = null;
+        },
+
+        setUserFromServer: (state, actions) => {
+            state.isAuthenticate = true;
+            state.user = actions.payload;
         }
     }
 })
 
-export const { addUser, removeUser } = userSlice.actions;
+export const { addUser, removeUser, setUserFromServer } = userSlice.actions;
 
 export default userSlice.reducer
+

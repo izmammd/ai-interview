@@ -67,7 +67,7 @@ const handleUserLogin = async (req, res) => {
 
         const token = await jwt.sign({ userId: isUser._id, email: isUser.email }, process.env.SECRETE_KEY, { expiresIn: "1d" });
         // console.log("token", token);
-        return res.cookie("token", token, { httpOnly: true }).status(200).json({ message: `${isUser.fullName} login successfully.`, success: true })
+        return res.cookie("token", token, { httpOnly: true, path: "/" }).status(200).json({ message: `${isUser.fullName} login successfully.`, success: true })
         // return res.status(200).json({ message: `${isUser.fullName} login successfully.`, success: true })
 
 
@@ -140,7 +140,9 @@ const handleUserLogOut = async (req, res) => {
             return res.status(404).json({ message: "User does not exists", success: false });
         }
 
-        return res.cookie("token", "", { maxAge: 0 }).json({ message: `${isUser.fullName} LogOut successfuly` })
+        return res.clearCookie("token", { path: "/" })
+            .clearCookie("token", { path: "/api/user" })
+            .json({ message: `${isUser.fullName} LogOut successfuly` })
     }
     catch (err) {
         console.log("Error comes from User Logout..", err.message)
