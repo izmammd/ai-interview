@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { setUserFromServer } from './Redux Store/Slice';
-import axios from 'axios';
+import api from './api';
 
 //BOOTSTRAP
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/user/getUser', {
+        const res = await api.get('/api/user/getUser', {
           headers: {
             "Content-Type": "application/json"
           },
@@ -85,5 +85,4 @@ function App() {
 }
 
 export default App
-
 

@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import api from "../api";
 import { useEffect, useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import { useParams } from "react-router-dom";
@@ -11,7 +11,7 @@ export default function AiQuestion() {
 
     // Fetch existing questions from session
     const getExistingQuestions = async () => {
-        const res = await axios.get(`http://localhost:3000/api/session/getSessionById/${param.id}`, {
+        const res = await api.get(`/api/session/getSessionById/${param.id}`, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -34,7 +34,7 @@ export default function AiQuestion() {
     }, [sessionData]);
 
     const generateQuestion = async () => {
-        const res = await axios.post(`http://localhost:3000/api/question/generateQuestion`,
+        const res = await api.post("/api/question/generateQuestion",
             { sessionId: param.id },
             {
                 headers: {
@@ -100,4 +100,3 @@ export default function AiQuestion() {
         </>
     );
 }
-

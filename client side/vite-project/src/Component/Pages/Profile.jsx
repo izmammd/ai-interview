@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios";
+import api from "../../api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ export default function Profile() {
 
     const getProfile = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/api/user/getuser", {
+            const res = await api.get("/api/user/getuser", {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -38,7 +38,7 @@ export default function Profile() {
     // console.log("get Profile : ", data);
 
     const handleLogOut = async () => {
-        const res = await axios.get("http://localhost:3000/api/user/logout",
+        const res = await api.get("/api/user/logout",
             { withCredentials: true });
         console.log(res.data);
         toast.success(res.data.message);
@@ -47,21 +47,6 @@ export default function Profile() {
         navigate("/");
 
     }
-
-    // const handleLogOut = async () => {
-        
-    //     try{
-    //         const res = await axios.get("http://localhost:3000/api/user/logout",
-    //             { withCredentials: true}
-    //         )
-
-    //         toast.success(res.data.message);
-    //         navigate("/home");
-    //     }
-    //     catch(err){
-    //         toast.error(err.response?.data?.message || "Something is error")
-    //     }
-    // }
 
     return (
         <>
@@ -125,4 +110,3 @@ export default function Profile() {
         </>
     )
 }
-

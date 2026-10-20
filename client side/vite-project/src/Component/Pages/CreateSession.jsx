@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import axios from "axios"
+import api from "../../api";
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -12,7 +12,7 @@ export default function CreateSession() {
     const { register, handleSubmit } = useForm()
 
     const handleSession = async (data) => {
-        const res = await axios.post("http://localhost:3000/api/session/createSession", data,
+        const res = await api.post("/api/session/createSession", data,
             { withCredentials: true }
         )
 
@@ -86,4 +86,3 @@ export default function CreateSession() {
 
     </>)
 }
-

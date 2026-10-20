@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import api from "../../api";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
@@ -13,7 +13,7 @@ export default function Register() {
     const { register, handleSubmit } = useForm();
 
     const handleRegisterUser = async (FormData) => {
-        let res = await axios.post(`http://localhost:3000/api/user/signup`,
+        let res = await api.post("/api/user/signup",
             FormData,
             { withCredentials: true }
         )
@@ -87,4 +87,3 @@ export default function Register() {
 
     </>)
 }
-

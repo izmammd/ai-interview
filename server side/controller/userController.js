@@ -1,8 +1,18 @@
 const USER = require("../models/userModels");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const imagekit = require("../config/imagekit.js")
+const getImagekit = require("../config/imagekit.js")
 
+const getAuthCookieOptions = () => {
+    const secure = (process.env.CLIENT_URL || "https://ai-interviews-rall.onrender.com").startsWith("https://");
+
+    return {
+        httpOnly: true,
+        path: "/",
+        secure,
+        sameSite: secure ? "none" : "lax"
+    };
+};
 
 const handleUserRegister = async (req, res) => {
 
@@ -67,7 +77,7 @@ const handleUserLogin = async (req, res) => {
 
         const token = await jwt.sign({ userId: isUser._id, email: isUser.email }, process.env.SECRETE_KEY, { expiresIn: "1d" });
         // console.log("token", token);
-        return res.cookie("token", token, { httpOnly: true, path: "/" }).status(200).json({ message: `${isUser.fullName} login successfully.`, success: true })
+        return res.cookie("token", token, getAuthCookieOptions()).status(200).json({ message: `${isUser.fullName} login successfully.`, success: true })
         // return res.status(200).json({ message: `${isUser.fullName} login successfully.`, success: true })
 
 
@@ -140,7 +150,7 @@ const handleUserLogOut = async (req, res) => {
             return res.status(404).json({ message: "User does not exists", success: false });
         }
 
-        return res.clearCookie("token", { path: "/" })
+        return res.clearCookie("token", getAuthCookieOptions())
             .clearCookie("token", { path: "/api/user" })
             .json({ message: `${isUser.fullName} LogOut successfuly` })
     }
@@ -254,7 +264,7 @@ const handleUserUpdate = async (req, res) => {
         // FOR UPDATE PROFILE PHOTO IF PROVIDED
         if (profilePhoto) {
 
-            const uploadImage = await imagekit.upload({
+            const uploadImage = await getImagekit().upload({
                 file: profilePhoto.buffer,
                 fileName: profilePhoto.originalname
             })
@@ -295,7 +305,11 @@ const handleUserUpdate = async (req, res) => {
     }
     catch (err) {
         console.log("Error comes from User Update..", err.message)
-        return res.status(500).json({ message: "Error comes from User Upadate..", success: false })
+        const isImagekitUnavailable = err.code === "IMAGEKIT_NOT_CONFIGURED";
+        return res.status(isImagekitUnavailable ? 503 : 500).json({
+            message: isImagekitUnavailable ? err.message : "Error comes from User Upadate..",
+            success: false
+        })
     }
 
 }

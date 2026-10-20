@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import api from "../../../api";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ export default function UpdateProfile() {
 
     const updateProfileApi = async (formData) => {
 
-        const res = await axios.post("http://localhost:3000/api/user/update",
+        const res = await api.post("/api/user/update",
             formData,
             { withCredentials: true }
         )
@@ -101,4 +101,3 @@ export default function UpdateProfile() {
 
     </>)
 }
-

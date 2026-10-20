@@ -13,10 +13,18 @@ const questionRouter = require("./router/questionRouter.js")
 configDotenv();
 const app = express();
 
-//  cors --> helps to connect frontEnt
+const frontendOrigin = process.env.CLIENT_URL || "https://ai-interviews-rall.onrender.com";
+const allowedOrigins = new Set([frontendOrigin, "http://localhost:5173"]);
+
 app.use(cors({
-    origin : "http://localhost:5173",   //frontend path
-    credentials : true                  // if we are using JWT/Cookies
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.has(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error("Origin is not allowed by CORS"));
+    },
+    credentials: true
 }))
 
 app.use(express.json());

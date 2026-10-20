@@ -2,7 +2,7 @@ import { useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { removeUser } from "../Redux Store/Slice.jsx"
-import axios from "axios"
+import api from "../api";
 import { toast } from "react-toastify"
 import Profile from "./Pages/Profile.jsx"
 
@@ -18,7 +18,7 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         try {
-            let res = await axios.get(`http://localhost:3000/api/user/logout`,
+            let res = await api.get("/api/user/logout",
                 {
                     withCredentials: true
                 }
@@ -86,4 +86,3 @@ export default function Navbar() {
 
     </>)
 }
-

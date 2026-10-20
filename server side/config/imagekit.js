@@ -1,12 +1,20 @@
-const { configDotenv } = require("dotenv");
 const Imagekit = require("imagekit");
 
-configDotenv()
+const getImagekit = () => {
+    const missingKeys = ["IMAGEKIT_PUBLIC_KEY", "IMAGEKIT_PRIVATE_KEY", "IMAGEKIT_URL_ENDPOINT"]
+        .filter((key) => !process.env[key]);
 
-const imagekit = new Imagekit({
-    publicKey : process.env.IMAGEKIT_PUBLIC_KEY,
-    privateKey : process.env.IMAGEKIT_PRIVATE_KEY,
-    urlEndpoint : process.env.IMAGEKIT_URL_ENDPOINT
-})
+    if (missingKeys.length) {
+        const error = new Error(`ImageKit is not configured. Missing: ${missingKeys.join(", ")}`);
+        error.code = "IMAGEKIT_NOT_CONFIGURED";
+        throw error;
+    }
 
-module.exports = imagekit
+    return new Imagekit({
+        publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+        privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+        urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
+    });
+};
+
+module.exports = getImagekit;

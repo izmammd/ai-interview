@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import axios from "axios";
+import api from "../../api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -27,27 +27,8 @@ export default function Login() {
         })
     }
 
-    // const handleLogin = async (e) => {
-    //     try {
-    //         e.preventDefault();
-    //         let res = await axios.post(`http://localhost:3000/api/user/login`,
-    //             userDetails,
-    //             {
-    //                 withCredentials: true
-    //             })
-            
-    //         toast.success(res.data.message)
-    //         dispatch(addUser());
-    //         navigate("/session");
-
-    //     } catch (err) {
-    //         console.log("Error from Login btn...", err.response.data.message)
-    //         toast.error(err.response.data.message);
-    //     }
-    // }
-
     const loginUser = async (userDetails) => {
-        let res = await axios.post(`http://localhost:3000/api/user/login`,
+        let res = await api.post("/api/user/login",
             userDetails,
             {
                 withCredentials : true
@@ -64,7 +45,7 @@ export default function Login() {
             
             // Fetch user data from server after successful login
             try {
-                const userRes = await axios.get('http://localhost:3000/api/user/getUser', {
+                const userRes = await api.get('/api/user/getUser', {
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -144,4 +125,3 @@ export default function Login() {
 
     </>)
 }
-
