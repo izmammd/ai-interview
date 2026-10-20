@@ -1,6 +1,6 @@
 const express = require("express");
 // const dotenv = require("dotenv");
-const connectDB = require("./config/Db");
+const connectDB = require("./config/DB.js");
 const { configDotenv } = require("dotenv");
 const userRouter = require("./router/userRouter");
 const cookieParser = require("cookie-parser");
@@ -32,7 +32,7 @@ app.use("/api/question",questionRouter)
 
 const port = process.env.PORT || 5000;
 
-app.listen(port,"localhost",()=>{
+app.listen(port,"0.0.0.0",()=>{
     connectDB();
     console.log(`http://localhost:${port}`)
 })
