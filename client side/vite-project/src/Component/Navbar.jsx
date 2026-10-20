@@ -50,8 +50,8 @@ export default function Navbar() {
             {
                 isAuthenticate ?
                     <div className="d-flex gap-3">
-                        <NavLink to="/createsession" className="btn btn-primary"></NavLink>
-                        <NavLink to="/session" className="btn btn-info"></NavLink>
+                        <NavLink to="/createsession" className="btn btn-primary">Create Session</NavLink>
+                        <NavLink to="/session" className="btn btn-info">All Session</NavLink>
                         
                     </div> :
                     ""
