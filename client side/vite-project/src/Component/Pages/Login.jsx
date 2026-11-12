@@ -93,9 +93,9 @@ export default function Login() {
                         width: "400px", borderRadius: "15px"
                     }}>
 
-                    <p className="login-eyebrow">WELCOME BACK</p>
-                    <h1 className="login-title">Sign in to SkillUp AI</h1>
-                    <p className="login-subtitle">Continue preparing for your next opportunity.</p>
+                    <p className="text-light">WELCOME BACK</p>
+                    <h1 className="text-light">Sign in to SkillUp AI</h1>
+                    <p className="text-light">Continue preparing for your next opportunity.</p>
 
                     <div className="mb-4">
                         {/* <label className="form-label fw-bold">Email</label> */}

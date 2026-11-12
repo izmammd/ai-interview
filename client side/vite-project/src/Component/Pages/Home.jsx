@@ -46,7 +46,7 @@ export default function Home() {
                         </p>
                         <div className="d-flex flex-wrap gap-3">
                             <button
-                                className="btn btn-info btn-lg fw-semibold px-4"
+                                className="btn btn-outline-info btn-lg fw-semibold px-4"
                                 onClick={() => navigate("/login")}
                             >
                                 Start practicing
@@ -96,19 +96,6 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="container pb-5" aria-label="How interview practice helps">
-                <div className="row g-3">
-                    {features.map((feature) => (
-                        <div className="col-md-4" key={feature.title}>
-                            <article className="h-100 rounded-4 border border-light border-opacity-10 bg-white bg-opacity-5 p-4">
-                                <i className={`bi ${feature.icon} fs-3 text-info`} aria-hidden="true"></i>
-                                <h2 className="h5 fw-bold mt-3">{feature.title}</h2>
-                                <p className="text-white-50 mb-0">{feature.description}</p>
-                            </article>
-                        </div>
-                    ))}
-                </div>
-            </section>
         </main>
     );
 }
