@@ -52,35 +52,77 @@ export default function Session() {
         }
     }
 
-    return (<>
+    return (
 
-        <div className="container-fluid d-flex flex-wrap justify-content-center align-items-center gap-4"
+        <main className="container-fluid py-5"
             style={{
                 minHeight: "88vh",
-                background: "#ffffff"
+                background: "#f4f6fb"
             }}>
 
+            <div className="row g-4">
+
             {sessions.length ? (
-                sessions.map((item, i) => {
-                    return (
-                        <div key={i} className="card shadow-lg text-center p-5 mt-4">
+                sessions.map((item, i) => (
 
-                            <div className="d-flex justify-content-end align-items-center">
-                                <button className="btn btn-danger d-flex me-1" onClick={() => handleRemove(item._id)}><i class="bi bi-trash3"></i></button>
-                            </div>
+                    <div className="col-12 col-sm-6 col-lg-4" key={i}>
 
-                            <div onClick={() => navigateSession(item._id)}>
-                                <h1>{item.role}</h1>
-                                <h3>{item.experience}</h3>
-                                <h4>{item.topicsToFocus}</h4>
+                        <div className="card border-0 shadow-lg h-100"
+                            style={{
+                                borderRadius: "18px",
+                                overflow: "hidden"
+                            }}>
+
+                            <div className="card-body p-4">
+
+                                <div className="d-flex justify-content-between align-items-center mb-4">
+
+                                    <span className="badge bg-primary px-3 py-2">
+                                        Interview Session
+                                    </span>
+
+                                    <button className="btn btn-sm btn-outline-danger rounded-circle"
+                                        onClick={()=>handleRemove(item._id)}>
+                                        <i className="bi bi-trash"></i>
+                                    </button>
+
+                                </div>
+
+                                <h4 className="fw-bold text-dark mb-4">
+                                    {item.role}
+                                </h4>
+
+                                <div className="mb-3">
+                                    <small className="text-secondary">EXPERIENCE</small>
+                                    <h6 className="fw-semibold mt-1">{item.experience}</h6>
+                                </div>
+
+                                <div className="mb-4">
+                                    <small className="text-secondary">TOPICS TO FOCUS</small>
+                                    <h6 className="fw-semibold mt-1">{item.topicsToFocus}</h6>
+                                </div>
+
+                                <button
+                                    className="btn btn-primary w-100 rounded-pill"
+                                    onClick={() => navigateSession(item._id)}
+                                >
+                                    View Session →
+                                </button>
+
                             </div>
 
                         </div>
-                    )
-                })
-            ) : (<h1>No Data</h1>)}
+
+                    </div>
+
+                ))
+            ) : (
+                <div className="text-center mt-5">
+                    <h4 className="text-secondary">No Sessions Found</h4>
+                </div>
+            )}
 
         </div>
 
-    </>)
+    </main>)
 }
