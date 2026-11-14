@@ -37,8 +37,6 @@ export default function SessionDetails() {
 
     // console.log("S-details : ", data);
 
-
-
     if (!param.id) {
         return <div>Loading session...</div>;
     }
