@@ -42,7 +42,11 @@ export default function Navbar() {
     }
 
     return (<>
-        <nav className="nav navbar shadow-sm p-4 sticky-top">
+        <nav className="nav navbar shadow-sm p-4 sticky-top"
+            style={{
+                background: "radial-gradient(ellipse at 75% 15%, #243b68 0%, #111827 42%, #080d18 100%)",
+            }}
+        >
             <div className="navbar-brand fw-bold text-warning">
                 SkillUp AI
             </div>
@@ -52,7 +56,7 @@ export default function Navbar() {
                     <div className="d-flex gap-3">
                         <NavLink to="/createsession" className="btn btn-primary">Create Session</NavLink>
                         <NavLink to="/session" className="btn btn-info">All Session</NavLink>
-                        
+
                     </div> :
                     ""
             }
@@ -63,8 +67,8 @@ export default function Navbar() {
                     isAuthenticate ?
                         <Profile /> :
                         (<>
-                            <button className="btn btn-primary me-3" onClick={handleLogin}>Login</button>
-                            <button className="btn btn-warning" onClick={handleRegister}>Register</button>
+                            <button className="btn btn-outline-primary me-3" onClick={handleLogin}>Login</button>
+                            <button className="btn btn-outline-warning" onClick={handleRegister}>Register</button>
                         </>)
 
                 }

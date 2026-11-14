@@ -75,9 +75,11 @@ export default function AiQuestion() {
                 )}
             </div>
 
-            <Accordion defaultActiveKey="0" className="m-auto"
+            <Accordion defaultActiveKey="0" className="container-fluid m-auto p-4"
                 style={{
+                    maxWidth: "400px",
                     width: "800px",
+                    minHeight: "100vh",
                 }}>
                 {
                     questions.length > 0 ?
@@ -85,15 +87,15 @@ export default function AiQuestion() {
                             return (
                                 <Accordion.Item eventKey={i.toString()} key={i}>
                                     <Accordion.Header>
-                                        <h4 className="fw-bold">{i + 1}. {que.question}</h4>
+                                        <h4 className="fw-semi-bold">Que. {i + 1}. {que.question}</h4>
                                     </Accordion.Header>
 
                                     <Accordion.Body>
-                                        <span>{que.answer}</span>
+                                        <span className="text-secondary">Ans. {que.answer}</span>
                                     </Accordion.Body>
                                 </Accordion.Item>
                             )
-                        }) : (<h3 className="text-center">No Question</h3>)
+                        }) : (<span className="text-center text-muted fw-semibold">No Question</span>)
                 }
 
             </Accordion>

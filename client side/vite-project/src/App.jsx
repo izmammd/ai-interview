@@ -17,7 +17,7 @@ import Home from './Component/Pages/Home';
 import Register from './Component/Pages/Register';
 import Login from './Component/Pages/Login';
 import Session from './Component/Pages/Session';
-import Question from './Component/Pages/Question';
+// import Question from './Component/Pages/Question';
 import SessionDetails from './Component/Pages/SessionDetails';
 import ForgotPass from './Component/Pages/User/ForgotPass';
 import UpdatePass from './Component/Pages/User/UpdatePass';
@@ -67,7 +67,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/session' element={<Session />} />
-          <Route path='/question' element={<Question />} />
+          {/* <Route path='/question' element={<Question />} /> */}
           <Route path='/session/:id' element={<SessionDetails />}></Route>
           <Route path='/forgotpass' element={<ForgotPass />}></Route>
           <Route path='/updatepass' element={<UpdatePass />}></Route>

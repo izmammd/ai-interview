@@ -1,0 +1,11 @@
+.auth-page .form-control::placeholder{
+    color: lightgray;
+}
+
+.auth-page .form-control{
+    background-color: transparent !important;
+    color: white !important;
+    border: none;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+}

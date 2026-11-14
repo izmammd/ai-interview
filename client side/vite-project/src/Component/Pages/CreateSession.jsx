@@ -3,7 +3,7 @@ import axios from "axios"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import "../Css/Register.css"
+// import "../Css/Register.css"
 
 
 export default function CreateSession() {
@@ -65,12 +65,12 @@ export default function CreateSession() {
 
                     <div className="mb-4">
                         <h5 className="fw-bold">ROLE</h5>
-                        <input {...register("role")} type="text" className="form-control border-0 border-end border-bottom" placeholder="Enter Your role..." />
+                        <input {...register("role")} type="text" className="form-control text-dark border-0 border-end border-bottom" placeholder="Enter Your role..." />
                     </div>
 
                     <div className="mb-4">
                         <p className="fw-semibold text-muted">EXPERIENCE</p>
-                        <input {...register("experience")} type="text" className="form-control border-0 border-end border-bottom" placeholder="Enter Your Experience.." />
+                        <input style={{color: "black"}} {...register("experience")} type="text" className="form-control border-0 border-end border-bottom" placeholder="Enter Your Experience.." />
                     </div>
 
                     <div className="mb-4">
@@ -78,7 +78,7 @@ export default function CreateSession() {
                         <input {...register("topicsToFocus")} type="text" className="form-control border-0 border-end border-bottom" placeholder="Enter Your Topics" />
                     </div>
 
-                    <div className="mb-3">
+                    <div className="mb-3 text-center">
                         <button className="btn btn-primary rounded-pill px-5">{mutation.isPending ? "Creating Session" : "Create Session →"}</button>
                     </div>
                 </form>

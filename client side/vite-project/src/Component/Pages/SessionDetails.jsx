@@ -49,7 +49,7 @@ export default function SessionDetails() {
 
             <div className="mx-auto col-12 col-md-4 col-sm-6 shadow-lg p-4"
                 style={{
-                    width: "400px",
+                    maxWidth: "auto",
                     borderRadius: "18px",
                     minHeight: "10vh",
                     overflow: "hidden"
@@ -57,7 +57,7 @@ export default function SessionDetails() {
 
                 <h5 className="fw-bold">{data?.isSession.role}</h5>
 
-                <p className="text-secondary">{data?.isSession.experience} year</p>
+                <p className="text-secondary">{data?.isSession.experience}</p>
 
                 <p className="text-secondary">{data?.isSession.topicsToFocus}</p>
 
