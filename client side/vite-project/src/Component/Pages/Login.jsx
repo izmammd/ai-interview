@@ -76,12 +76,14 @@ export default function Login() {
 
     return (
 
-        <main className="auth-page"
+        <main
             style={{
                 background: "radial-gradient(ellipse at 75% 15%, #243b68 0%, #111827 42%, #080d18 100%)",
                 minHeight: "calc(100vh - 88px)",
             }}
         >
+
+
 
             <div className="container d-flex justify-content-center align-items-center"
                 style={{ minHeight: "88vh" }}>
@@ -93,15 +95,16 @@ export default function Login() {
                     }}>
 
                     <p className="text-light">WELCOME BACK</p>
-                    <h1 className="text-warning">Sign in to SkillUp AI</h1>
-                    <p className="text-secondary">Continue preparing for your next opportunity.</p>
+                    <h1 className="text-light">Sign in to SkillUp AI</h1>
+                    <p className="text-light">Continue preparing for your next opportunity.</p>
 
                     <div className="mb-4">
                         {/* <label className="form-label fw-bold">Email</label> */}
                         <input type="email" className="form-control shadow-sm"
                             onChange={handleChange}
                             name="email" value={email}
-                            placeholder="you@example.com" />
+                            placeholder="you@example.com"
+                            autoComplete="email" />
                     </div>
 
                     <div className="mb-4">
@@ -109,7 +112,8 @@ export default function Login() {
                         <input type="password" className="form-control shadow-sm border-0 border-bottom border-end"
                             onChange={handleChange}
                             name="password" value={password}
-                            placeholder="Enter Password..." />
+                            placeholder="Enter Password..."
+                            autoComplete="current-password" />
                     </div>
 
                     <div className="mb-4">

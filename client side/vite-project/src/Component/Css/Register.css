@@ -1,8 +1,8 @@
-.auth-page .form-control::placeholder{
+.form-control::placeholder{
     color: lightgray;
 }
 
-.auth-page .form-control{
+.form-control{
     background-color: transparent !important;
     color: white !important;
     border: none;

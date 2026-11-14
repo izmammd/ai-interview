@@ -43,7 +43,7 @@ export default function Register() {
     }
 
     return (
-        <main className="auth-page"
+        <main
             style={{ background: "radial-gradient(ellipse at 75% 15%, #243b68 0%, #111827 42%, #080d18 100%)", }}>
 
 

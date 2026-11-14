@@ -61,7 +61,7 @@ export default function SessionDetails() {
 
                 <p className="text-secondary">{data?.isSession.topicsToFocus}</p>
 
-            </div>
+            </div> 
 
             <div>
                 <AiQuestion />
