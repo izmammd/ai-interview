@@ -1,45 +1,101 @@
 import { useNavigate } from "react-router-dom";
 
+const features = [
+    {
+        icon: "bi-person-video3",
+        title: "Practice your way",
+        description: "Choose a role and focus on the skills you want to improve.",
+    },
+    {
+        icon: "bi-chat-square-text",
+        title: "Get interview questions",
+        description: "Work through questions tailored to your interview preparation.",
+    },
+    {
+        icon: "bi-graph-up-arrow",
+        title: "Build confidence",
+        description: "Practice at your own pace and feel more prepared for the real thing.",
+    },
+];
 
 export default function Home() {
-
     const navigate = useNavigate();
 
-    return (<>
-
-        <div className="container-fluid d-flex justify-content-center align-items-center"
+    return (
+        <main
+            className="text-light"
             style={{
-                minHeight: "88vh",
-                background: "linear-gradient(135deg, #000000, #1a1a1a, #2c2c2c)",
-            }}>
+                background: "radial-gradient(ellipse at 75% 15%, #243b68 0%, #111827 42%, #080d18 100%)",
+                minHeight: "calc(100vh - 88px)",
+            }}
+        >
+            <section className="container py-5">
+                <div className="row align-items-center g-5 py-lg-5">
+                    <div className="col-lg-7">
+                        <span className="badge rounded-pill text-bg-primary px-3 py-2 mb-4">
+                            <i className="bi bi-stars me-2" aria-hidden="true"></i>
+                            Your next opportunity starts here
+                        </span>
+                        <h1 className="display-3 fw-bold lh-sm mb-4">
+                            Walk into your next interview
+                            <span className="text-info"> with confidence.</span>
+                        </h1>
+                        <p className="lead text-white-50 mb-4">
+                            Prepare with AI-powered interview practice built around your goals.
+                            Choose a role, explore questions, and get ready at your own pace.
+                        </p>
+                        <div className="d-flex flex-wrap gap-3">
+                            <button
+                                className="btn btn-outline-info btn-lg fw-semibold px-4"
+                                onClick={() => navigate("/login")}
+                            >
+                                Start practicing
+                                <i className="bi bi-arrow-right ms-2" aria-hidden="true"></i>
+                            </button>
+                            <button
+                                className="btn btn-outline-light btn-lg px-4"
+                                onClick={() => navigate("/register")}
+                            >
+                                Create an account
+                            </button>
+                        </div>
+                        <p className="small text-white-50 mt-4 mb-0">
+                            <i className="bi bi-check-circle-fill text-info me-2" aria-hidden="true"></i>
+                            Practice whenever you&apos;re ready, at your own pace.
+                        </p>
+                    </div>
 
-            <div
-                className="text-center text-white p-5 shadow-lg"
-                style={{
-                    maxWidth: "800px",
-                    borderRadius: "20px",
-                    background: "rgba(255,255,255,0.08)",
-                    backdropFilter: "blur(10px)",
-                }}
-            >
-                <div className="display-4 fw-bold mb-5">
-                    Prepare Your Interview with ME
+                    <div className="col-lg-5">
+                        <div
+                            className="rounded-4 border border-light border-opacity-10 p-4 p-md-5 shadow-lg"
+                            style={{
+                                background: "linear-gradient(145deg, rgba(37, 55, 88, 0.9), rgba(17, 24, 39, 0.95))",
+                            }}
+                        >
+                            <div className="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <p className="small text-info text-uppercase fw-semibold mb-1">Practice preview</p>
+                                    <h2 className="h4 fw-bold mb-0">Your interview session</h2>
+                                </div>
+                                <span className="rounded-circle bg-info bg-opacity-10 text-info p-3">
+                                    <i className="bi bi-mic-fill fs-4" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div className="rounded-3 bg-dark bg-opacity-50 p-3 mb-3">
+                                <p className="small text-white-50 mb-2">QUESTION 01</p>
+                                <p className="mb-0">
+                                    Tell me about a project you&apos;re proud of and the impact you made.
+                                </p>
+                            </div>
+                            <div className="d-flex align-items-center gap-3 text-white-50 small">
+                                <span><i className="bi bi-lightning-charge text-warning me-2" aria-hidden="true"></i>Role-focused practice</span>
+                                <span><i className="bi bi-clock me-2" aria-hidden="true"></i>Your own pace</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <div className="display-3 fw-bold text-info mb-4">AI Coach</div>
-
-                
-                    <p className="lead text-light mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem vero maxime ullam at! Molestiae ipsa veritatis exercitationem assumenda id quae dolorem, rem error. Iusto officiis accusantium cum temporibus libero ut?
-                        Sapiente tenetur hic eveniet delectus ab id sit molestias cupiditate nesciunt provident possimus impedit numquam reiciendis, enim repellat doloribus, mollitia est beatae officia sequi magni. Non ducimus at quae voluptatem.</p>
-                
-
-                <div>
-                    <button className="btn btn-primary btn-lg px-5" onClick={()=>navigate("/login")}>Get Started</button>
-                </div>
-            </div>
-
-        </div>
-
-    </>)
+        </main>
+    );
 }
-

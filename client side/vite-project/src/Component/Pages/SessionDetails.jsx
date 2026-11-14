@@ -45,27 +45,22 @@ export default function SessionDetails() {
 
     return (<>
 
-        <div className="conatiner">
+        <div className="conatiner-fluid p-4">
 
-            <div className="text-center d-flex flex-column m-auto my-4 shadow-lg"
+            <div className="mx-auto col-12 col-md-4 col-sm-6 shadow-lg p-4"
                 style={{
-                    width: "800px",
-                    borderRadius: "15px"
+                    width: "400px",
+                    borderRadius: "18px",
+                    minHeight: "10vh",
+                    overflow: "hidden"
                 }}>
-                <div className="d-flex justify-content-start align-items-center gap-3 mb-4">
-                    <h1>Role :</h1>
-                    <h1>{data?.isSession.role}</h1>
-                </div>
 
-                <div className="d-flex justify-content-start align-items-center gap-3 mb-4">
-                    <h1>Experience :</h1>
-                    <h1>{data?.isSession.experience} year</h1>
-                </div>
+                <h5 className="fw-bold">{data?.isSession.role}</h5>
 
-                <div className="d-flex justify-content-start align-items-center gap-3 mb-4">
-                    <h1>Topics to Focus :</h1>
-                    <h1>{data?.isSession.topicsToFocus}</h1>
-                </div>
+                <p className="text-secondary">{data?.isSession.experience} year</p>
+
+                <p className="text-secondary">{data?.isSession.topicsToFocus}</p>
+
             </div>
 
             <div>
