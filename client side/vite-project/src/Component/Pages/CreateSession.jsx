@@ -3,6 +3,7 @@ import axios from "axios"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import "../Css/Register.css"
 
 
 export default function CreateSession() {
@@ -51,7 +52,7 @@ export default function CreateSession() {
                 background: "#ffffff"
             }}>
 
-            <div className="text-center text-white p-5 shadow-lg mt-4"
+            <div className="p-5 shadow-lg mt-4"
                 style={{
                     width: "500px",
                     maxWidth: "800px",
@@ -61,24 +62,26 @@ export default function CreateSession() {
             >
 
                 <form onSubmit={handleSubmit(handleOnSubmit)}>
+
                     <div className="mb-4">
-                        <input {...register("role")} type="text" className="form-control" placeholder="Enter Your role..." />
+                        <h5 className="fw-bold">ROLE</h5>
+                        <input {...register("role")} type="text" className="form-control border-0 border-end border-bottom" placeholder="Enter Your role..." />
                     </div>
 
                     <div className="mb-4">
-                        <input {...register("experience")} type="text" className="form-control" placeholder="Enter Your Experience.." />
+                        <p className="fw-semibold text-muted">EXPERIENCE</p>
+                        <input {...register("experience")} type="text" className="form-control border-0 border-end border-bottom" placeholder="Enter Your Experience.." />
                     </div>
 
                     <div className="mb-4">
-                        <input {...register("topicsToFocus")} type="text" className="form-control" placeholder="Enter Your Topics" />
+                        <p className="fw-semibold text-muted">TOPICS</p>
+                        <input {...register("topicsToFocus")} type="text" className="form-control border-0 border-end border-bottom" placeholder="Enter Your Topics" />
                     </div>
 
-                    <div className="mb-4">
-                        <button className="btn btn-primary btn-lg px-5">{mutation.isPending ? "Creating Session" : "Create Session"}</button>
+                    <div className="mb-3">
+                        <button className="btn btn-primary rounded-pill px-5">{mutation.isPending ? "Creating Session" : "Create Session →"}</button>
                     </div>
                 </form>
-
-
 
             </div>
 
