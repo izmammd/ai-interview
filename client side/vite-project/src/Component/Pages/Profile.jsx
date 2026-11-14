@@ -40,7 +40,7 @@ export default function Profile() {
     const handleLogOut = async () => {
         const res = await axios.get("https://ai-interview-rbit.onrender.com/api/user/logout",
             { withCredentials: true });
-        console.log(res.data);
+        // console.log(res.data);
         toast.success(res.data.message);
         setShowDropdown(!showDropdown)
         dispatch(removeUser());
@@ -50,13 +50,12 @@ export default function Profile() {
 
     return (
         <>
-            <div className="container d-flex justify-content-center align-items-center">
+            <div className="container-fluid d-flex justify-content-center align-items-center">
 
                 <div className="position-relative">
 
                     <img
                         src={data?.isUser?.profilePhoto ? data.isUser.profilePhoto : "https://imgs.search.brave.com/XLM6WQZOOjg4USteTMmA56CbGwKhBGOcLHTpbDno-xU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMjE3/MTM4MjYzMy92ZWN0/b3IvdXNlci1wcm9m/aWxlLWljb24tYW5v/bnltb3VzLXBlcnNv/bi1zeW1ib2wtYmxh/bmstYXZhdGFyLWdy/YXBoaWMtdmVjdG9y/LWlsbHVzdHJhdGlv/bi5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9WndPRjZOZk9S/MHpoWUM0NHhPWDA2/cnlJUEFVaER2QWFq/clBzYVo2djEtdz0"}
-                        // src="https://imgs.search.brave.com/XLM6WQZOOjg4USteTMmA56CbGwKhBGOcLHTpbDno-xU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMjE3/MTM4MjYzMy92ZWN0/b3IvdXNlci1wcm9m/aWxlLWljb24tYW5v/bnltb3VzLXBlcnNv/bi1zeW1ib2wtYmxh/bmstYXZhdGFyLWdy/YXBoaWMtdmVjdG9y/LWlsbHVzdHJhdGlv/bi5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9WndPRjZOZk9S/MHpoWUM0NHhPWDA2/cnlJUEFVaER2QWFq/clBzYVo2djEtdz0"
                         alt="profile"
                         className="rounded-circle border shadow"
                         style={{
@@ -64,8 +63,6 @@ export default function Profile() {
                             width: "50px",
                             objectFit: "conatin"
                         }}
-                        alt="Profile"
-
                         onClick={() => setShowDropdown(!showDropdown)}
                     />
 

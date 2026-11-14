@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserFromServer } from "../../Redux Store/Slice";
 import { useMutation } from "@tanstack/react-query"
+import "../Css/Register.css"
 
 
 export default function Login() {
@@ -99,7 +100,7 @@ export default function Login() {
 
                     <div className="mb-4">
                         {/* <label className="form-label fw-bold">Email</label> */}
-                        <input type="email" className="form-control shadow-sm border-0 border-bottom border-end"
+                        <input type="email" className="form-control shadow-sm"
                             onChange={handleChange}
                             name="email" value={email}
                             placeholder="you@example.com"
@@ -128,7 +129,7 @@ export default function Login() {
                     </div>
 
                     <div>
-                        <p className="text-center mb-0">
+                        <p className="text-center text-white mb-0">
                             Create account ? {" "} <NavLink to="/register" className="text-decoration-none">
                                 Register
                             </NavLink>
