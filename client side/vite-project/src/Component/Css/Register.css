@@ -1,0 +1,11 @@
+.form-control::placeholder{
+    color: lightgray;
+}
+
+.form-control{
+    background-color: transparent !important;
+    color: white !important;
+    border: none;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+}
