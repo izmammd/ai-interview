@@ -69,7 +69,7 @@ export default function Profile() {
                     {/* {showDropdown 
                 } */}
 
-                    {showDropdown && <div className="card position-absolute top-100 end-0 shadow"
+                    {showDropdown && <div className="container-fluid card position-absolute top-100 end-0 shadow"
                     onClick={()=>setShowDropdown(!showDropdown)}
                         style={{
                             width: "200px",

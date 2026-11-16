@@ -29,11 +29,19 @@ export default function SessionDetails() {
         }
     }
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey: ["session Details", param.id],
         queryFn: handleGetSessionDetails,
         enabled: !!param.id
     })
+
+    if(isLoading){
+        return <p className="text-center">Page Loading, Please wait...</p>
+    }
+
+    if(isError){
+        return <p className="text-center text-danger">{error.response?.data?.message || "Unable to load page try again.."}</p>
+    }
 
     // console.log("S-details : ", data);
 

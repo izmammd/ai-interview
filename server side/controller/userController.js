@@ -161,7 +161,7 @@ const handleUserLogOut = async (req, res) => {
 }
 
 const handleUserDelete = async (req, res) => {
-
+ 
     try {
 
         if (req.body == undefined) {
@@ -181,17 +181,17 @@ const handleUserDelete = async (req, res) => {
             return res.status(400).json({ message: "Fill the password...", success: false })
         }
 
-        console.log("password delte user: ", password)
+        // console.log("password delte user: ", password)
         const isUser = await USER.findById(id);
 
         if (!isUser) {
             return res.status(404).json({ message: "User does not exists", success: false });
         }
 
-        console.log("password before user: ", isUser.password)
+        // console.log("password before user: ", isUser.password)
         const isPassword = await bcrypt.compare(password, isUser.password);
 
-        console.log("password after user: ", isUser.password)
+        // console.log("password after user: ", isUser.password)
         if (!isPassword) {
             return res.status(409).json({ message: "password invalid", success: false });
         }

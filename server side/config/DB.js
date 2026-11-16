@@ -15,14 +15,16 @@
 
 const mongoose = require("mongoose");
 
+const mongoDb = process.env.MONGOOSE_URI || "mongodb://localhost:27017/AI_INTERVIEW_DB"
+
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGOOSE_URI);
+        await mongoose.connect(mongoDb);
         console.log("DB connected successfully");
     } catch (err) {
         console.error("Error from DB connection:", err.message);
         throw err;
     }
-};
+}; 
 
 module.exports = connectDB;

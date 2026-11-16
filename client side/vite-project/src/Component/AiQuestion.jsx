@@ -77,8 +77,8 @@ export default function AiQuestion() {
 
             <Accordion defaultActiveKey="0" className="container-fluid m-auto p-4"
                 style={{
-                    maxWidth: "400px",
-                    width: "800px",
+                    width: "100%",
+                    maxWidth: "800px",
                     minHeight: "100vh",
                 }}>
                 {
@@ -95,7 +95,7 @@ export default function AiQuestion() {
                                     </Accordion.Body>
                                 </Accordion.Item>
                             )
-                        }) : (<span className="text-center text-muted fw-semibold">No Question</span>)
+                        }) : (<h6 className="text-center text-muted fw-semibold">No Question</h6>)
                 }
 
             </Accordion>

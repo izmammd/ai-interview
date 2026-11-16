@@ -57,7 +57,7 @@ export default function CreateSession() {
                     width: "500px",
                     maxWidth: "800px",
                     borderRadius: "20px",
-                    background: "#ffffff"
+                    // background: "#ffffff"
                 }}
             >
 

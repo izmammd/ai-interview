@@ -30,7 +30,7 @@ export default function Register() {
             toast.success(data.message);
             navigate("/login");
         },
-
+ 
         onError: (error) => {
             toast.error(error.response?.data?.message || "Something is wrong")
         }
@@ -61,23 +61,23 @@ export default function Register() {
 
                     <form onSubmit={handleSubmit(registerFormHandler)}>
 
-                        <p className="text-light">WELCOME</p>
-                        <h1 className="text-center mb-4">Fill All the Details</h1>
+                        {/* <p className="text-light">WELCOME</p> */}
+                        <h1 className="text-center text-warning fw-semibold mb-4">Register for improve your skill with us</h1>
 
                         <div className="mb-4">
                             <label className="form-label fw-bold">Full Name</label>
-                            <input type="text" {...register("fullName")} className="form-control"
-                            placeholder="Enter your Name..." />
+                            <input type="text" {...register("fullName")} className="form-control inp"
+                                placeholder="Enter your Name..." />
                         </div>
 
                         <div className="mb-4">
-                            <label className="form-label fw-bold bg-transparent">Email</label>
-                            <input type="email" {...register("email")} className="form-control" placeholder="Enter your Email..." />
+                            <label className="form-label fw-bold">Email</label>
+                            <input type="email" {...register("email")} className="form-control inp" placeholder="Enter your Email..." />
                         </div>
 
                         <div className="mb-4">
                             <label className="form-label fw-bold">Password</label>
-                            <input type="text" {...register("password")} className="form-control" placeholder="Enter your Password..." />
+                            <input type="password" {...register("password")} className="form-control inp" placeholder="Enter your Password..." />
                         </div>
 
                         <div className="mb-4">
